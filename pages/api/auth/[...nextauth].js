@@ -29,7 +29,12 @@ export const authOptions = {
         return false
       }
     },
-  }
+  },
+  pages: {
+    signIn: "/auth/signin",
+    verifyRequest: "/auth/verify-request",
+    error: "/auth/error",
+  },
 }
 
 export default NextAuth(authOptions)
