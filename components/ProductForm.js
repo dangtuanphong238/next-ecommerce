@@ -121,7 +121,7 @@ export default function ProductForm({
       >
         <option value={'0'}>Uncategorized</option>
         {categories.length > 0 && categories.map(category => (
-          <option value={category._id}>
+          <option key={category._id} value={category._id}>
             {category.name}
           </option>
         ))}
@@ -135,8 +135,8 @@ export default function ProductForm({
               onChange={(ev) => {
                 setProductProp(p.name, ev.target.value)
               }}>
-              {p.values.map(v => (
-                <option value={v}>{v}</option>
+              {p.values.map((v, index) => (
+                <option key={index} value={v}>{v}</option>
               ))}
             </select>
           </div>
