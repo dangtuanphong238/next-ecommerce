@@ -71,7 +71,7 @@ export default function ProductForm({
           .then((res) => res.json())
           .then((data) => {
             setImages(oldImages => {
-              return [...oldImages, { _id: _idImageNew, url: `http://localhost:3000/${data}` }]
+              return [...oldImages, { _id: _idImageNew, url: `https://next-ecommerce-admin-dangtuanphong238.vercel.app/${data}` }]
             })
           })
           .catch((err) => console.log(err));
