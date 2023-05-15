@@ -36,4 +36,5 @@ next-env.d.ts
 
 .env
 package-lock.json
+/static/images
 

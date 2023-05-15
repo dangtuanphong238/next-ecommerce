@@ -56,27 +56,48 @@ export default function ProductForm({
     const file = ev.target?.files[0]
     const _idImageNew = uuidv4();
 
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        const data = reader.result.split(',')[1];
-        const name = file.name;
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', process.env.UPLOAD_PRESET_KEY);
 
-        fetch('/api/upload', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, data }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            setImages(oldImages => {
-              return [...oldImages, { _id: _idImageNew, url: `https://next-ecommerce-admin-dangtuanphong238.vercel.app/${data}` }]
-            })
-          })
-          .catch((err) => console.log(err));
-      };
+    const data = await fetch('https://api.cloudinary.com/v1_1/dhtmahqsw/image/upload', {
+      method: 'POST',
+      body: formData
+    }).then(r => r.json());
+    console.log("data", data)
+    if (data) {
+      const url = data.url;
+      setImages(oldImages => {
+        return [...oldImages, {
+          _id: _idImageNew,
+          url: url
+        }]
+      })
     }
+
+    //save file to disk and generate an url:
+    // if (file) {
+    //   const reader = new FileReader();
+    //   reader.readAsDataURL(file);
+    //   reader.onload = () => {
+    //     const data = reader.result.split(',')[1];
+    //     const name = file.name;
+    //     fetch('/api/upload', {
+    //       method: 'POST',
+    //       headers: { 'Content-Type': 'application/json' },
+    //       body: JSON.stringify({ name, data }),
+    //     })
+    //       .then((res) => res.json())
+    //       .then((data) => {
+    //         setImages(oldImages => {
+    //           return [...oldImages, { 
+    //             _id: _idImageNew, 
+    //             url: `http://localhost:3000/${data}` }]
+    //           })
+    //       })
+    //       .catch((err) => console.log(err));
+    //   };
+    // }
   }
 
   function updateImagesOrder(images) {
