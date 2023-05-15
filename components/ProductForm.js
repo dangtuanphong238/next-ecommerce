@@ -60,7 +60,7 @@ export default function ProductForm({
     formData.append('file', file);
     formData.append('upload_preset', 'h47tbvog');
 
-    const data = await fetch(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_NAME}/image/upload`, {
+    const data = await fetch(`https://api.cloudinary.com/v1_1/dhtmahqsw/image/upload`, {
       method: 'POST',
       body: formData
     }).then(r => r.json());
