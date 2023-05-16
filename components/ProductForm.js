@@ -55,12 +55,10 @@ export default function ProductForm({
   async function uploadImages(ev) {
     const file = ev.target?.files[0]
     const _idImageNew = uuidv4();
-    const { CLOUDINARY_NAME, UPLOAD_PRESET_KEY } = process.env;
-
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', `${UPLOAD_PRESET_KEY}`);
-    const data = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/image/upload`, {
+    formData.append('upload_preset', `${process.env.NEXT_PUBLIC_UPLOAD_PRESET_KEY}`);
+    const data = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_NAME}/image/upload`, {
       method: 'POST',
       body: formData
     }).then(r => r.json());
