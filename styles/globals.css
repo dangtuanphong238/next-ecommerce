@@ -31,6 +31,10 @@ label {
     @apply bg-primary text-white px-4 rounded-md py-1
 }
 
+.btn-primary, .end {
+    @apply bg-primary text-white px-4 rounded-md py-1
+}
+
 table.basic {
     @apply w-full;
 }
@@ -59,4 +63,8 @@ table.basic a {
 
 .btn-default {
     @apply bg-gray-500 text-white border-gray-200 shadow-sm;
+}
+
+.bottom-button {
+    @apply text-right mt-4
 }
